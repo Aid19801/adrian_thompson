@@ -1,8 +1,6 @@
 import React from 'react';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { withAuthorization } from '../../components/Session';
-import { withFirebase } from '../../components/Firebase';
 import withProgressBar from '../../components/ProgressBar/with-progressBar';
 
 import * as actions from './constants';
@@ -36,8 +34,6 @@ class AboutPage extends React.Component {
   }
 }
 
-const condition = authUser => !!authUser;
-
 const mapStateToProps = state => ({
   isLoading: state.aboutPage.isLoading,
 })
@@ -48,8 +44,6 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default compose(
-  withAuthorization(condition),
-  withFirebase,
   withProgressBar,
   connect(mapStateToProps, mapDispatchToProps),
 )(AboutPage);

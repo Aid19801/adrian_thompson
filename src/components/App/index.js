@@ -7,12 +7,12 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import Navigation from '../Navigation';
 
-
-import { AboutPage, AdminPage, AccountPage, HomePage, LandingPage, SignInPage, SignUpPage, PasswordForgetPage } from '../../containers';
+import { AboutPage, ProjectsPage, ContactPage, HomePage } from '../../containers';
 
 import * as ROUTES from '../../constants/routes';
-import { withAuthentication } from '../Session';
+
 import * as actions from './constants';
+import './styles.css';
 
 const App = ({ appLoading, appLoaded }) => {
 
@@ -28,19 +28,13 @@ const App = ({ appLoading, appLoaded }) => {
   return (
     <Router>
 
-      <div>
+      <div className="app__container">
         <Navigation />
   
-        <hr />
-  
-        <Route exact path={ROUTES.LANDING} component={LandingPage} />
-        <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-        <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-        <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
         <Route path={ROUTES.HOME} component={HomePage} />
-        <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+        <Route exact path={ROUTES.PROJECTS} component={ProjectsPage} />
         <Route path={ROUTES.ABOUT} component={AboutPage} />
-        <Route path={ROUTES.ADMIN} component={AdminPage} />
+        <Route path={ROUTES.CONTACT} component={ContactPage} />
       </div>
     </Router>
       );
@@ -59,6 +53,5 @@ const mapDispatchToProps = dispatch => ({
 
 
 export default compose(
-  withAuthentication,
   connect(mapStateToProps, mapDispatchToProps)
 )(App);

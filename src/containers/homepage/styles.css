@@ -1,0 +1,14 @@
+.home__first {
+    background-image: url('./splash.jpg');
+    background-size: cover;
+}
+
+.home__second {
+    background-image: linear-gradient(to right, white, beige);
+    background-size: cover;
+}
+
+.home__third {
+    background-image: linear-gradient(to top, black, beige);
+    background-size: cover;
+}

@@ -1,39 +1,51 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { withAuthorization } from '../../components/Session';
+import Fade from 'react-reveal/Fade';
 import * as actions from './constants';
 import withProgressBar from '../../components/ProgressBar/with-progressBar';
+import Title from '../../components/Title';
 
-class HomePage extends Component {
-  constructor() {
-    super()
-    this.state = {};
-  }
+import './styles.css';
 
-  componentWillMount() {
-    this.props.showProgressBar(true);
-    this.props.pageLoading();
-  }
+const HomePage = ({ showProgressBar, pageLoading, pageLoaded }) => {
 
-  componentDidMount() {
-    this.props.pageLoaded();
+  useEffect(() => {
+    showProgressBar(true);
+    pageLoading();
+  }, []);
+
+  useEffect(() => {
     setTimeout(() => {
-      this.props.showProgressBar(false);
-    }, 100)
-  }
+      showProgressBar(false);
+      pageLoaded();
+    }, 100);
+  }, []);
 
-  render() {
-    return (
-      <div>
-        <h1>Home Page</h1>
-        <p> is a thing and stuff... every signed-in user.</p>
+  return (
+    <div className="home__container">
+
+      <div className="home__first centered-full-page">
+        <Fade bottom>
+          <Title text="Solinqui Digital" />
+        </Fade>
       </div>
-    )
-  }
-}
 
-const condition = authUser => !!authUser;
+      <div className="home__second centered-full-page">
+        <Fade bottom>
+          <Title text="second" />
+        </Fade>
+      </div>
+
+      <div className="home__third centered-full-page">
+        <Fade bottom>
+          <Title text="thirs" />
+        </Fade>
+      </div>
+
+    </div>
+  )
+}
 
 const mapStateToProps = state => ({
   isLoading: state.homePage.isLoading,
@@ -46,6 +58,6 @@ const mapDispatchToProps = dispatch => ({
 
 export default compose(
   withProgressBar,
-  withAuthorization(condition),
+
   connect(mapStateToProps, mapDispatchToProps),
 )(HomePage);
