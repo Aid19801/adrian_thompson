@@ -4,4 +4,41 @@
     background: beige;
     padding: 20px;
     border-radius: 25px;
+    position: relative;
 }
+
+.title__container span {
+    color: black;
+    font-size: 40px;
+}
+
+.dots__container {
+    position: relative;
+    bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    height: 9px;
+}
+
+.dots__container span {
+    position: relative;
+    width: 100%;
+    background: rgb(69, 188, 243);
+    height: 5px;
+    border-radius: 25px;
+    animation: flicker 500ms ease alternate;
+    animation-delay: 2000ms;
+}
+
+@keyframes flicker {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  

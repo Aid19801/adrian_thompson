@@ -1,90 +1,62 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
-import Button from '@material-ui/core/Button';
-import HomeIcon from '@material-ui/icons/Home';
-
-import MenuIcon from '@material-ui/icons/Menu';
-import AddIcCallIcon from '@material-ui/icons/AddIcCall';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import CodeIcon from '@material-ui/icons/Code';
-
-import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import React, { useState } from 'react'
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import Menu from '@material-ui/icons/Menu';
 import './styles.css';
 
-function MenuLinks({ menuStatus }) {
+function Navigation() {
 
-    return (
-      <div className={menuStatus} id='menu'>
-        <ul>
+  const [headerStyle, setHeaderStyle] = useState({
+    transition: 'all 200ms ease-in',
+    visibility: 'visible',
+    // transitionDelay: '1000ms',
+  })
 
-          <li>
-            <HomeIcon />
-            <Link to={ROUTES.HOME}>Home</Link>
-          </li>
+  const [drawer, setDrawer] = useState(true);
 
-          <li>
-            <MenuBookIcon />
-            <Link to={ROUTES.PROJECTS}>Projects</Link>
-          </li>
-          <li>
-            <CodeIcon />
-            <Link to={ROUTES.ABOUT}>About</Link>
-          </li>
-          <li>
-            <AddIcCallIcon />
-            <Link to={ROUTES.CONTACT}>Contact</Link>
-          </li>
-        </ul>
-      </div>
-    )
-}
+  useScrollPosition(({ prevPos, currPos }) => {
+      const isVisible = (currPos.y > prevPos.y) || currPos.y === 0;
 
-class Navigation extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false
-    }
-    this._menuToggle = this._menuToggle.bind(this);
-    this._handleDocumentClick = this._handleDocumentClick.bind(this);
+      const shouldBeStyle = {
+        visibility: isVisible ? 'visible' : 'hidden',
+        transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
+        transform: isVisible ? 'none' : 'translate(0, -100%)',
+        // transitionDelay: '1000ms',
+      }
+
+      if (JSON.stringify(shouldBeStyle) === JSON.stringify(headerStyle)) return;
+      setHeaderStyle(shouldBeStyle)
+    }, [headerStyle]);
+
+  const handleClick = () => {
+    setDrawer(!drawer);
   }
-  componentDidMount() {
-    document.addEventListener('click', this._handleDocumentClick, false);
-  }
-  componentWillUnmount() {
-    document.removeEventListener('click', this._handleDocumentClick, false);
-  }
-  _handleDocumentClick(e) {
-    if (!this.refs.root.contains(e.target) && this.state.isOpen === true) {
-      this.setState({
-        isOpen: false
-      });
-    };
-  }
-  _menuToggle(e) {
-    e.stopPropagation();
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
-  render() {
 
-    let menuStatus = this.state.isOpen ? 'isopen' : '';
+  return (
+    <header style={ { ...headerStyle, position: 'absolute' } } >
 
-    return (
-      <div ref="root" style={{ position: 'absolute', left: 0, right: 0 }}>
-        <div className="menubar">
-          <div className="hambclicker" onClick={this._menuToggle}></div>
-          <div id="hambmenu" className={menuStatus}><span></span><span></span><span></span><span></span></div>
-          <div className="title">
-            <span>{this.props.title}</span>
-          </div>
+      <div className="nav__container flex-center">
+
+        <div className="small-logo">
+          <h1>S</h1>
+          <h1 style={{ color: 'rgb(69, 188, 243)', fontWeight: 'bold' }}>.</h1>
         </div>
-        <MenuLinks menuStatus={menuStatus} />
+
+        <Menu onClick={handleClick} />
+        
       </div>
-    )
-  }
+
+      { drawer && (
+        <div id="drawer__container">
+          <ul className="flex-row space-evenly">
+            <li>Home</li>
+            <li>About</li>  
+            <li>Projects</li>
+            <li>Contact</li>
+          </ul>
+        </div>
+      ) }
+    </header>
+  )
 }
 
 export default Navigation;

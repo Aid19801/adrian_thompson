@@ -37,7 +37,7 @@ const App = ({ appLoading, appLoaded }) => {
         <Route path={ROUTES.CONTACT} component={ContactPage} />
       </div>
     </Router>
-      );
+    );
 }
 
 const mapStateToProps = state => ({

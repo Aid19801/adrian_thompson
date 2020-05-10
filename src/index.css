@@ -1,5 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lobster&display=swap');
 
+:root {
+  --animation-time: 2s; 
+}
+/* * {
+  border: 1px solid green;
+} */
 
 body {
   margin: 0;
@@ -13,7 +19,7 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  monospace;
 }
 
 .flex-center {
@@ -23,6 +29,26 @@ code {
   align-content: center;
   text-align: center;
 }
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.space-evenly {
+  justify-content: space-evenly;
+}
+
+.space-around {
+  justify-content: space-around;
+}
+
+
 
 .centered-full-page {
   border: 1px solid red;

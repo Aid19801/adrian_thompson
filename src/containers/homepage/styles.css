@@ -1,6 +1,16 @@
 .home__first {
     background-image: url('./splash.jpg');
     background-size: cover;
+	background-color: rgba(255, 255, 255, 0);
+    /* background: linear-gradient(rgba(255, 255, 255, 0), 
+		rgba(255, 255, 255, 0)), url('./splash.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed !important;
+	background-size: 100% !important;
+	background-position: center top !important;
+	padding: 1rem;
+	padding-top: 45%;
+	color: #fff; */
 }
 
 .home__second {
