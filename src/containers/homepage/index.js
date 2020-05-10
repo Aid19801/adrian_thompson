@@ -5,6 +5,7 @@ import Fade from 'react-reveal/Fade';
 import * as actions from './constants';
 import withProgressBar from '../../components/ProgressBar/with-progressBar';
 import Title from '../../components/Title';
+import Box from '../../components/Box';
 
 import './styles.css';
 
@@ -48,7 +49,11 @@ return (
 
     <div className="home__second centered-full-page">
       <Fade bottom>
-        <Title text="second" />
+        <div className="stackable__icons">
+          <Box icon="mouse" text="Heading Goes Here" blurb="Some things about this particular icon and things because." />
+          <Box icon="phone" text="Heading Goes Here" blurb="Some things about this particular icon and things because." />
+          <Box icon="people" text="Heading Goes Here" blurb="Some things about this particular icon and things because." />
+        </div>
       </Fade>
     </div>
 
