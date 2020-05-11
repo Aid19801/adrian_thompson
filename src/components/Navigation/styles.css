@@ -27,18 +27,29 @@
 
 #drawer__container {
     width: 100vw;
-    height: 35px;
     background: rgb(69, 188, 243);
     border: 1px solid white;
     padding-left: 0;
     padding-right: 0;
-    padding-top: 10px;
-    animation: mymove 100ms ease-out;
   }
-  
-  @keyframes mymove {
-    from {height: 0px;}
+
+.fade-in {
+    height: 35px;
+    padding-top: 10px;
+    animation: fadeIn 100ms ease-out;
+}
+.fade-out {
+    height: 0px;
+    animation: fadeOut 100ms ease-out;
+}
+
+  @keyframes fadeIn {
+    from { height: 0px; }
     to { height: 35px; }
+  }
+  @keyframes fadeOut {
+    from { height: 35px; }
+    to { height: 0px; }
   }
 
 ul {

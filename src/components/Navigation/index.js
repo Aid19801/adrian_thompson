@@ -14,25 +14,25 @@ function Navigation() {
   const [drawer, setDrawer] = useState(true);
 
   useScrollPosition(({ prevPos, currPos }) => {
-      const isVisible = (currPos.y > prevPos.y) || currPos.y === 0;
+    const isVisible = (currPos.y > prevPos.y) || currPos.y === 0;
 
-      const shouldBeStyle = {
-        visibility: isVisible ? 'visible' : 'hidden',
-        transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
-        transform: isVisible ? 'none' : 'translate(0, -100%)',
-        // transitionDelay: '1000ms',
-      }
+    const shouldBeStyle = {
+      visibility: isVisible ? 'visible' : 'hidden',
+      transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
+      transform: isVisible ? 'none' : 'translate(0, -100%)',
+      // transitionDelay: '1000ms',
+    }
 
-      if (JSON.stringify(shouldBeStyle) === JSON.stringify(headerStyle)) return;
-      setHeaderStyle(shouldBeStyle)
-    }, [headerStyle]);
+    if (JSON.stringify(shouldBeStyle) === JSON.stringify(headerStyle)) return;
+    setHeaderStyle(shouldBeStyle)
+  }, [headerStyle]);
 
   const handleClick = () => {
     setDrawer(!drawer);
   }
 
   return (
-    <header style={ { ...headerStyle, position: 'absolute' } } >
+    <header style={{ ...headerStyle, position: 'absolute' }} >
 
       <div className="nav__container flex-center">
 
@@ -42,19 +42,20 @@ function Navigation() {
         </div>
 
         <Menu onClick={handleClick} />
-        
+
       </div>
 
-      { drawer && (
-        <div id="drawer__container">
+
+      <div id="drawer__container" className={drawer ? "fade-in" : "fade-out"}>
+        {drawer && (
           <ul className="flex-row space-evenly">
             <li>Home</li>
-            <li>About</li>  
+            <li>About</li>
             <li>Projects</li>
             <li>Contact</li>
           </ul>
-        </div>
-      ) }
+        )}
+      </div>
     </header>
   )
 }
